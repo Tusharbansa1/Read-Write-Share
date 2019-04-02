@@ -1,0 +1,14 @@
+<div class="container col-md-4 col-md-offset-4">
+        <% if (message) { %>
+            <div class="alert alert-danger"><%= message %></div>
+          <% } %>
+        <form action="/user/signin" method="post">
+            <h2>Signin</h2>
+            <label for="email">Email</label> <br> <input type="email" name="email">
+            <br>
+            <label for="password">Password</label> <br> <input type="password" name="password">
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    
+    </div>   
