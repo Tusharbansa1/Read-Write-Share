@@ -27,7 +27,7 @@ function isLoggedIn(req,res,next){
    return next();
  }
  else{
-  res.redirect('/');
+  res.redirect('/user/signup');
  }
 }
 module.exports = {

@@ -49,7 +49,7 @@ app.get('/logout', function(req, res){
     // below two lines are the way to check, if there is any session on not
     // var sess=req.session;
     // console.log(sess);
-    res.redirect('/user');
+    res.redirect('/');
   });
 
 
@@ -79,9 +79,9 @@ app.get('/facebook',isnotLoggedIn,
     res.render('homepage/index' , {name: req.user});
   });
 
- app.get('/design',function(req,res){
-    res.render('user/design');
- }) ;
+//  app.get('/design',function(req,res){
+//     res.render('user/design');
+//  }) ;
 
 
 function isnotLoggedIn(req,res,next){  

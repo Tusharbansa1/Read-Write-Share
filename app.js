@@ -6,6 +6,7 @@ var logger = require('morgan');
 var passport = require('passport');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
+var profileRouter = require('./routes/profile');
 var session      = require('express-session');
 var socket = require('./routes/socket');
 var flash        = require('req-flash');
@@ -14,6 +15,7 @@ var validator = require('express-validator');
 var app = express();
 app.io = require('socket.io')();
 require('./config/passport');
+
 
 
 // view engine setup
@@ -30,6 +32,14 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
 app.use(flash());
+
+
+app.use(function(req,res,next){
+  res.locals.login=req.isAuthenticated();
+  // console.log('print this '+req.isAuthenticated());
+  next();
+});
+app.use('/profile', profileRouter);
 app.use('/socket', socket.router);
 app.use('/user', userRouter);
 app.use('/', indexRouter);

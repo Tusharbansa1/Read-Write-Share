@@ -8,13 +8,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="/">Read Write Share</a>
           </div>
       
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            
             <ul class="nav navbar-nav navbar-right">
+             
               <li><a href="#">
                   <% if (name) { %>
                    <%= name.email %>
@@ -28,10 +29,17 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Signup</a></li>
-                  <li><a href="#">Signin</a></li>
+                    <% if (login) { %>
+                      <li><a href="/user/logout">logout</a></li>
+                     <% }else{%> 
+                      
+                  <li><a href="/user/signup">Signup</a></li>
+                  <!-- <li><a href="/user/signin">Signin</a></li> -->
+                  <li><a href="/user/facebook"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                  <li><a href="/user/google"><i class="fab fa-google"></i> Google</a></li>
+                      <%}%>
                   <!-- <li><a href="/user/logout">logout</a></li> -->
-                  <li><a href="/user/logout">logout</a></li>
+                  
                 </ul>
               </li>
             </ul>
