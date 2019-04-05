@@ -1,62 +1,92 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
-// used in case of mongoose data store and retrieve 
-var Models = require("./connection"); 
-// these three are used to use passport
+const multer = require('multer');
+var Photos = require("./connection");
 var passport = require('passport');
-// parse application/x-www-form-urlencoded
+var upload = require('./upload');
+
 router.use(bodyParser.urlencoded({ extended: false }));
- 
-// parse application/json
 router.use(bodyParser.json())
 
-
 /* GET home page. */
-router.get('/',isLoggedIn, function(req, res, next) {
+router.get('/', function (req, res, next) {
+  Photos.profile_connect.find({}, ['id', 'content', 'image'], { sort: { _id: -1 } }, function (err, photos) {
+    if (err) throw err;
+    console.log(photos);
+    res.render('profile/index');
+  });
+});
+
+
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+var upload = multer({ storage: storage });
+router.post('/index',upload.single('image'), function (req, res) {
+    // if (error) {
+    //   // res.redirect('/?msg=3');
+    //   console.log(error);
+    // } else {
+      if (req.file == undefined) {
+        res.redirect('/?msg=2');
+      } else {
+
+        /**
+         * Create new record in mongoDB
+         */
+        var fullPath = "uploads/" + req.file.filename;
+        var document = {
+          image: fullPath,
+          content: req.body.content
+        };
+
+        var photo = new Photos.profile_connect(document);
+        photo.save(function (error) {
+          if (error) {
+            throw error;
+          }
+          res.redirect('/?msg=1');
+        });
+      
+    }
   
-
-  
-  res.render('profile/index',{name:req.user});
 });
 
-router.post('/index', isLoggedIn, function(req,res,next){
 
-       
- var Bee = new Models.profile_connect({ 
-   id: req.session.passport.user,
- content: req.body.content,
- image: req.body.image
-});
-Bee.save(function(error) { 
- console.log("Your cretentials has been saved.");
- res.send('success');
-//  indexpage(res) ;  
- if (error) {
- console.error(error);
- }
-});
-});
-function isLoggedIn(req,res,next){  
-  if(req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
     return next();
   }
-  else{
-   res.redirect('/user/signup');
+  else {
+    res.redirect('/user/signup');
   }
- }
+}
 
 
 module.exports = router;
 
-// Session {
+// router.post('/index', isLoggedIn, function(req,res,next){
+//   upload(req, res,(error) => {
+//   var fullPath = "files/"+req.file.filename;
 
-//   cookie:
-//   { path: '/',
-//     _expires: null,
-//     originalMaxAge: null,
-//     httpOnly: true },
-//  _flash: {},
-//  passport: { user: '5c98fd60e3bba223928a6f67' }
+//   var document = {
+//     id: req.session.passport.user,
+//     image:     fullPath, 
+//     content:   req.body.content
+//   };
 
-//  }
+// var photo = new Photo(document); 
+// photo.save(function(error){
+//   if(error){ 
+//     throw error;
+//   } 
+//   res.send('/?success');
+// });
+// });
