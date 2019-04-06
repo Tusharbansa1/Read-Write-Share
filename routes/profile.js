@@ -13,8 +13,8 @@ router.use(bodyParser.json());
 router.get('/',isLoggedIn, function (req, res, next) {
   Photos.profile_connect.find({id:req.session.passport.user},  function (err, photos) {
     if (err) throw err;
-    console.log(photos);
-    res.render('profile/index', {data:photos});
+    // console.log(photos);
+    res.render('profile/index', {data:photos, name:req.user});
   });
 });
 
