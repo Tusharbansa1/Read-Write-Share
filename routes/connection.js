@@ -2,9 +2,10 @@ var mongoose = require("mongoose");
 var signup1 = require("../model/signup");
 var profile1 = require("../model/profile");
 
+
 /* Imports the Bugs module. It contains the bug schema we need. */
-mongoose.connect("mongodb://localhost:27017/vidjot" , { useNewUrlParser: true }); //Test is the database name. 
-// mongoose.connect('mongodb://tusharbansal:tushar.12@ds117866.mlab.com:17866/test1', { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost:27017/vidjot" , { useNewUrlParser: true }); //Test is the database name. 
+mongoose.connect('mongodb://tusharbansal:tushar.12@ds135234.mlab.com:35234/vidjot', { useNewUrlParser: true });
 
 var db = mongoose.connection;
  
