@@ -116,8 +116,8 @@ passport.use('google.signin', new GoogleStrategy({
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
 }, (accessToken, refreshToken, profile, done) => {
-  console.log('foring callback');
-  console.log(profile);
+  // console.log('foring callback');
+  // console.log(profile);
 
 
   Models.signup_connect.findOne({
