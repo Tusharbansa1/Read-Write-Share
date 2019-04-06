@@ -18,7 +18,7 @@ profile  page
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nodejs file upload with MongoDB</title>
+    <title>Profile Page</title>
 </head>
 
 <body>
@@ -43,7 +43,14 @@ profile  page
             <div class="col s12"> <button class="btn waves-effect waves-light" type="submit" name="action">Upload<i class="material-icons right">send</i></button></div>
         </div>
     </form>
-    <img src="/uploads/ima" alt="imgae">
+
+    <% data.forEach(function(user){%>
+        <!-- <li><%= user.id %></li> -->
+        <div class="row card-panel hoverable">
+            <div class="col s6 center-align responsive-img"><img width="200" src='/<%= user.image %>' alt="image"> </div>
+            <div class="col s6 center-align"><%= user.content %></div>
+        </div>
+        <%})%>
 </body>
 
 </html>

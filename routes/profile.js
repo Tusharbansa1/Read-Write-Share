@@ -7,14 +7,14 @@ var passport = require('passport');
 var upload = require('./upload');
 
 router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json())
+router.use(bodyParser.json());
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  Photos.profile_connect.find({}, ['id', 'content', 'image'], { sort: { _id: -1 } }, function (err, photos) {
+router.get('/',isLoggedIn, function (req, res, next) {
+  Photos.profile_connect.find({id:req.session.passport.user},  function (err, photos) {
     if (err) throw err;
     console.log(photos);
-    res.render('profile/index');
+    res.render('profile/index', {data:photos});
   });
 });
 
@@ -43,6 +43,7 @@ router.post('/index',upload.single('image'), function (req, res) {
          */
         var fullPath = "uploads/" + req.file.filename;
         var document = {
+          id: req.session.passport.user,
           image: fullPath,
           content: req.body.content
         };
