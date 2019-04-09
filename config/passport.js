@@ -156,7 +156,7 @@ var FacebookStrategy = require('passport-facebook');
 passport.use('facebook.signin',new FacebookStrategy({
   clientID: keys.facebook.clientID,
   clientSecret: keys.facebook.clientSecret,
-  callbackURL: "http://localhost:3000/user/facebookredirect"
+  callbackURL: "http://glacial-cove-50175.herokuapp.com/user/facebookredirect"
 },
 function(accessToken, refreshToken, profile, done) {
   console.log('facebook callback');
