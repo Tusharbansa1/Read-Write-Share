@@ -37,8 +37,7 @@ function(req, res) {
 });
 
 app.get('/logout', function(req, res){
-    var sess=req.session;
-    console.log(sess);
+    
     req.logout();
     // below if else line to check user is logged in or not
     // if (req.user) {
@@ -71,11 +70,10 @@ app.get('/facebook',isnotLoggedIn,
   passport.authenticate('facebook.signin', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    var sess=req.session;
-    console.log(sess);
-    console.log('working here too');
+    
     // res.send(req.user);
-    res.render('homepage/index' , {name: req.user});
+    res.redirect('/');
+    // res.render('homepage/index' , {name: req.user});
   });
 
 //  app.get('/design',function(req,res){
