@@ -27,13 +27,15 @@ app.get('/signin',isnotLoggedIn, (req,res)=>{
 app.post('/signup',
 passport.authenticate('local.signup', { failureRedirect: '/user/signup', failureFlash:true }),
 function(req, res) {
-    res.render('homepage/index' , {name: req.user});
+    // res.render('homepage/index' , {name: req.user});
+    res.redirect('/');
 });
 
 app.post('/signin',
 passport.authenticate('local.signin', { failureRedirect: '/user/signin', failureFlash:true }),
 function(req, res) {
-    res.render('homepage/index' , {name: req.user});
+    // res.render('homepage/index' , {name: req.user});
+    res.redirect('/');
 });
 
 app.get('/logout', function(req, res){
