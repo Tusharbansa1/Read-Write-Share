@@ -29,7 +29,8 @@
     <a href="/" class="brand-logo left">Read Write Share</a>
     <a class="right" href="/user/logout">Logout</a>
 
-    <h4 class="center-align"><%= name.email %> <a href="/socket/home"><button>   Chat</button></a></h4>
+    <h4 class="center-align"><%= name.email %> <%= name.google.emailid %>
+        <%= name.facebook.name %> <a href="/socket/home"><button>   Chat</button></a></h4>
     <form action="/profile/index" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="col s12"></div>
