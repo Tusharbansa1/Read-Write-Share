@@ -19,7 +19,7 @@ function socket(io) {
   /* GET home page. */
   router.get('/home',isLoggedIn, function(req, res, next) {
     // res.render('chat/index', { name:req.user });
-    res.redirect('/chat/index');
+    res.redirect('chat/index');
   });
 }
 
