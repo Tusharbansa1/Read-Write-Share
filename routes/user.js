@@ -11,15 +11,15 @@ app.get('/success', (req, res) => res.send("Welcome "+req.query.username+"!!"));
 app.get('/error', (req, res) => res.send("error logging in"));
 
 app.get('/signup',isnotLoggedIn, (req,res)=>{ 
-    var sess=req.session;
-    console.log('runnng in signp '+sess);
+    // var sess=req.session;
+    // console.log('runnng in signp '+sess);
     // this is the way to catch the flash && the name req.user is just to pass at the navbar
         res.render('user/index',  {message: req.flash('error'),name: req.user});
     })
 
 app.get('/signin',isnotLoggedIn, (req,res)=>{ 
-    var sess=req.session;
-    console.log('runnning in signin'+sess);
+    // var sess=req.session;
+    // console.log('runnning in signin'+sess);
     // this is the way to catch the flash && the name req.user is just to pass at the navbar
         res.render('user/index',  {message: req.flash('error'),name: req.user});
     })
@@ -58,11 +58,10 @@ app.get('/google',isnotLoggedIn, passport.authenticate('google.signin',{
 }));
   
 app.get('/redirect',passport.authenticate('google.signin'), function(req,res){
-    var sess=req.session;
-    console.log(sess);
-    console.log('working here too');
+    
     // res.send(req.user);
-    res.render('homepage/index' , {name: req.user});
+    res.redirect('/');
+    // res.render('homepage/index' , {name: req.user});
 })
 
 app.get('/facebook',isnotLoggedIn,

@@ -139,7 +139,7 @@ passport.use('google.signin', new GoogleStrategy({
         if (err) {
           return done(err);
         } else {
-          console.log('new user creaate +' + newuser);
+          // console.log('new user creaate +' + newuser);
           return done(null, newuser);
         }
       });
@@ -159,8 +159,8 @@ passport.use('facebook.signin',new FacebookStrategy({
   callbackURL: "https://glacial-cove-50175.herokuapp.com/user/facebookredirect"
 },
 function(accessToken, refreshToken, profile, done) {
-  console.log('facebook callback');
-  console.log(profile);
+  // console.log('facebook callback');
+  // console.log(profile);
 
 
   Models.signup_connect.findOne({
@@ -182,7 +182,7 @@ function(accessToken, refreshToken, profile, done) {
         if (err) {
           return done(err);
         } else {
-          console.log('new user creaate +' + newuser);
+          // console.log('new user creaate +' + newuser);
           return done(null, newuser);
         }
       });
