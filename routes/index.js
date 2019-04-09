@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
   //   var sess=req.session;
   //   console.log(sess);
   //   console.log(req.isAuthenticated());
+  console.log(req.user);
   res.render('homepage/index',{name:req.user});
 });
 
